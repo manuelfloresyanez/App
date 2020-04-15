@@ -18,9 +18,10 @@ export class PersonController {
     async GetPerson(@Res() res, @Param('id') id){
         try{
             const result = await this.personService.ViewPerson(id);
-            if(result){
-                return res.status(HttpStatus.OK).json(result)
+            if(!result){
+                throw new NotFoundException('Person not found')
             }
+            return res.status(HttpStatus.OK).json(result)
         }catch{
             throw new NotFoundException('Invalid Id')
         }
