@@ -9,7 +9,6 @@ export class PersonController {
 
     }
 
-
     @Get()
     GetAllPeople(@Res() res){
         const result = this.personService.ViewAllPeople();
@@ -20,22 +19,25 @@ export class PersonController {
 
     @Get('/:id')
     GetPerson(@Res() res, @Param('id') id){
+        const result = this.personService.ViewPerson();
         return res.status(HttpStatus.OK).json({
-            message: 'Success'
+            result
         })
     }
 
     @Post()
     CreatePerson(@Res() res, @Body() body){
+        const result = this.personService.SavePerson();
         return res.status(HttpStatus.OK).json({
-            message: 'Success'
+            result
         })
     }
 
     @Put('/:id')
     UpdatePerson(@Res() res, @Param('id') id, @Body() body, ){
+        const result = this.personService.ModifyPerson();
         return res.status(HttpStatus.OK).json({
-            message: 'Success'
+            result
         })
     }
 

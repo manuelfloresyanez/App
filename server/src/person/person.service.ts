@@ -15,7 +15,7 @@ export class PersonService {
         return {rut: 'success'}
     }
 
-    UpdatePerson(){
+    ModifyPerson(){
         return {rut: 'success'}
     }
 
