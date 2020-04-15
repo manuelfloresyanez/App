@@ -1,12 +1,13 @@
 import { Controller, Get, Res, HttpStatus, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { identity } from 'rxjs';
+import { PersonService } from './person.service';
 
 @Controller('people')
 export class PersonController {
 
-
     @Get()
     GetAllPeople(@Res() res){
+        PersonService
         return res.status(HttpStatus.OK).json({
             success: 'Success'
         })
