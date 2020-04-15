@@ -34,16 +34,16 @@ export class PersonController {
     }
 
     @Put('/:id')
-    async UpdatePerson(@Res() res, @Param('id') id, @Body() body, ){
-        const result = await this.personService.ModifyPerson();
+    async UpdatePerson(@Res() res, @Param('id') id, @Body() body){
+        const result = await this.personService.ModifyPerson(id, body);
         return res.status(HttpStatus.OK).json({
             result
         })
     }
 
     @Delete('/:id')
-    async DeletePerson(@Res() res, @Param('id') id, @Body() body){
-        const result = await this.personService.RemovePerson();
+    async DeletePerson(@Res() res, @Param('id') id){
+        const result = await this.personService.RemovePerson(id);
         return res.status(HttpStatus.OK).json({
             message: 'Success'
         })

@@ -24,12 +24,14 @@ export class PersonService {
         return person
     }
 
-    ModifyPerson(){
-        return {rut: 'success'}
+    ModifyPerson(id, body){
+        const person = this.personModel.updateOneById(id, body)
+        return person
     }
 
-    RemovePerson(){
-
+    RemovePerson(id){
+        const person = this.personModel.removeOneById(id)
+        return person
     }
     
 }
