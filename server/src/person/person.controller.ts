@@ -29,7 +29,7 @@ export class PersonController {
     @Put(':/id')
     UpdatePerson(@Param('id') id, @Body() body, @Res() res){
         return res.status(HttpStatus.OK).json({
-            message: 'success'
+            message: 'Success'
         })
     }
 
