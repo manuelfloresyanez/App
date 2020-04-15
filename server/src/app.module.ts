@@ -5,7 +5,7 @@ import { PersonModule } from './person/person.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [PersonModule, MongooseModule.forRoot('mongodb://localhost/people')],
+  imports: [PersonModule, MongooseModule.forRoot('mongodb://localhost/people', { useNewUrlParser: true })],
   controllers: [AppController],
   providers: [AppService],
 })
