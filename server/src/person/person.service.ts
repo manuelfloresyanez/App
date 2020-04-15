@@ -25,7 +25,7 @@ export class PersonService {
     }
 
     ModifyPerson(id, body){
-        const person = this.personModel.findOneAndUpdate(id, body)
+        const person = this.personModel.findOneAndUpdate(id, body, {new: true})
         return person
     }
 

@@ -46,9 +46,9 @@ export class PersonController {
     async UpdatePerson(@Res() res, @Param('id') id, @Body() body){
         try{
             const result = await this.personService.ModifyPerson(id, body);
-        return res.status(HttpStatus.OK).json({
-            result
-        })
+            return res.status(HttpStatus.OK).json({
+                result
+            })
         }catch{
             throw new NotFoundException('Invalid Id')
         }
