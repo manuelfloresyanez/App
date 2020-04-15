@@ -9,15 +9,15 @@ export class PersonController {
     }
 
     @Get()
-    async GetAllPeople(@Res() res){
-        const result = await this.personService.ViewAllPeople();
+    async findAllPeople(@Res() res){
+        const result = await this.personService.getAllPeople();
         return res.status(HttpStatus.OK).json(result)
     }
 
     @Get('/:id')
-    async GetPerson(@Res() res, @Param('id') id){
+    async findPerson(@Res() res, @Param('id') id){
         try{
-            const persons = await this.personService.ViewPerson(id);
+            const persons = await this.personService.getPerson(id);
             if(!persons){
                 throw new NotFoundException('Person not found')
             }
@@ -29,9 +29,9 @@ export class PersonController {
     }
 
     @Post()
-    async CreatePerson(@Res() res, @Body() body){
+    async createPerson(@Res() res, @Body() body){
         try{
-            const person = await this.personService.SavePerson(body);
+            const person = await this.personService.savePerson(body);
             return res.status(HttpStatus.CREATED).json(
             {
                 message: 'Person successfully created',    
@@ -45,10 +45,10 @@ export class PersonController {
     }
 
     @Put('/:id')
-    async UpdatePerson(@Res() res, @Param('id') id, @Body() body){
+    async updatePerson(@Res() res, @Param('id') id, @Body() body){
         try{
             if(body.rut != undefined || body.name != undefined || body.lastName != undefined || body.age != undefined || body.course != undefined){
-                const person = await this.personService.ModifyPerson(id, body);
+                const person = await this.personService.modifyPerson(id, body);
                 return res.status(HttpStatus.OK).json({
                     message: 'Person successfully updated',
                     _id: person._id
@@ -66,9 +66,9 @@ export class PersonController {
     }
 
     @Delete('/:id')
-    async DeletePerson(@Res() res, @Param('id') id){
+    async deletePerson(@Res() res, @Param('id') id){
         try{
-            const person = await this.personService.RemovePerson(id);
+            const person = await this.personService.removePerson(id);
             if(person){
                 return res.status(HttpStatus.OK).json({
                     message: 'Person successfully deleted',

@@ -9,27 +9,27 @@ export class PersonService {
 
     }
 
-    ViewAllPeople(){
+    getAllPeople(){
         const allPersons = this.personModel.find();
         return allPersons;
     }
 
-    ViewPerson(id){
+    getPerson(id){
         const person = this.personModel.findById(id)
         return person;
     }
 
-    SavePerson(body){
+    savePerson(body){
         const person = this.personModel.create(body)
         return person
     }
 
-    ModifyPerson(id, body){
+    modifyPerson(id, body){
         const person = this.personModel.findByIdAndUpdate(id, body, {new: true})
         return person
     }
 
-    async RemovePerson(id){
+    async removePerson(id){
         const person = await this.personModel.findByIdAndDelete(id)
         return person
     }
