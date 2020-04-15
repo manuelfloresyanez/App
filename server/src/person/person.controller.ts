@@ -17,10 +17,10 @@ export class PersonController {
         return res.status(HttpStatus.OK).json(persons)
     }
 
-    @Get('/:id')
-    async find(@Res() res, @Param('id') id){
+    @Get(':id')
+    async find(@Res() res, @Param() params){
         try{
-            const person = await this.personService.getPerson(id);
+            const person = await this.personService.getPerson(params.id);
             if(!person){
                 throw new NotFoundException('Person not found')
             }
@@ -47,11 +47,11 @@ export class PersonController {
         
     }
 
-    @Put('/:id')
-    async update(@Res() res, @Param('id') id, @Body() body){
+    @Put(':id')
+    async update(@Res() res, @Param() params, @Body() body){
         try{
             if(body.rut != undefined || body.name != undefined || body.lastName != undefined || body.age != undefined || body.course != undefined){
-                const person = await this.personService.modifyPerson(id, body);
+                const person = await this.personService.modifyPerson(params.id, body);
                 return res.status(HttpStatus.OK).json({
                     message: 'Person successfully updated',
                     _id: person._id
@@ -68,10 +68,10 @@ export class PersonController {
         
     }
 
-    @Delete('/:id')
-    async deletePerson(@Res() res, @Param('id') id){
+    @Delete(':id')
+    async deletePerson(@Res() res, @Param() params){
         try{
-            const person = await this.personService.removePerson(id);
+            const person = await this.personService.removePerson(params.id);
             if(person){
                 return res.status(HttpStatus.OK).json({
                     message: 'Person successfully deleted',
