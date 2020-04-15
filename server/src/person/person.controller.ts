@@ -42,7 +42,7 @@ export class PersonController {
             }
         )
         }catch{
-            throw new BadRequestException('Invalid Data')
+            throw new BadRequestException("Invalid Data, please enter all the required fields")
         }
         
     }
