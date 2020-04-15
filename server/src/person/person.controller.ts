@@ -9,7 +9,7 @@ export class PersonController {
     }
 
     @Get()
-    async findAll(@Res() res){
+    async findAll(@Res() res): Promise<any[]>{
         const persons = await this.personService.getAllPeople();
         if(!persons){
             throw new NotFoundException('No persons found')
@@ -18,9 +18,9 @@ export class PersonController {
     }
 
     @Get(':id')
-    async find(@Res() res, @Param() params){
+    async find(@Res() res, @Param('id') id): Promise<any[]>{
         try{
-            const person = await this.personService.getPerson(params.id);
+            const person = await this.personService.getPerson(id);
             if(!person){
                 throw new NotFoundException('Person not found')
             }
@@ -32,7 +32,7 @@ export class PersonController {
     }
 
     @Post()
-    async create(@Res() res, @Body() body){
+    async create(@Res() res, @Body() body): Promise<any[]>{
         try{
             const person = await this.personService.savePerson(body);
             return res.status(HttpStatus.CREATED).json(
@@ -48,10 +48,10 @@ export class PersonController {
     }
 
     @Put(':id')
-    async update(@Res() res, @Param() params, @Body() body){
+    async update(@Res() res, @Param('id') id, @Body() body): Promise<any[]>{
         try{
             if(body.rut != undefined || body.name != undefined || body.lastName != undefined || body.age != undefined || body.course != undefined){
-                const person = await this.personService.modifyPerson(params.id, body);
+                const person = await this.personService.modifyPerson(id, body);
                 return res.status(HttpStatus.OK).json({
                     message: 'Person successfully updated',
                     _id: person._id
@@ -69,9 +69,9 @@ export class PersonController {
     }
 
     @Delete(':id')
-    async deletePerson(@Res() res, @Param() params){
+    async deletePerson(@Res() res, @Param('id') id): Promise<any[]>{
         try{
-            const person = await this.personService.removePerson(params.id);
+            const person = await this.personService.removePerson(id);
             if(person){
                 return res.status(HttpStatus.OK).json({
                     message: 'Person successfully deleted',
