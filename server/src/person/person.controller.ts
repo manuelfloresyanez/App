@@ -20,20 +20,20 @@ export class PersonController {
     }
 
     @Post()
-    CreatePerson(@Res() res,@Body() body){
+    CreatePerson(@Res() res, @Body() body){
         return res.status(HttpStatus.OK).json({
             message: 'Success'
         })
     }
 
-    @Put(':/id')
+    @Put('/:id')
     UpdatePerson(@Param('id') id, @Body() body, @Res() res){
         return res.status(HttpStatus.OK).json({
             message: 'Success'
         })
     }
 
-    @Delete(':/id')
+    @Delete('/:id')
     DeletePerson(@Res() res, @Param('id') id, @Body() body){
         return res.status(HttpStatus.OK).json({
             message: 'Success'
