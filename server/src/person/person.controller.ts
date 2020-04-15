@@ -10,39 +10,40 @@ export class PersonController {
     }
 
     @Get()
-    GetAllPeople(@Res() res){
-        const result = this.personService.ViewAllPeople();
+    async GetAllPeople(@Res() res){
+        const result = await this.personService.ViewAllPeople();
         return res.status(HttpStatus.OK).json({
             result
         })
     }
 
     @Get('/:id')
-    GetPerson(@Res() res, @Param('id') id){
-        const result = this.personService.ViewPerson(id);
+    async GetPerson(@Res() res, @Param('id') id){
+        const result = await this.personService.ViewPerson(id);
         return res.status(HttpStatus.OK).json({
             result
         })
     }
 
     @Post()
-    CreatePerson(@Res() res, @Body() body){
-        const result = this.personService.SavePerson();
+    async CreatePerson(@Res() res, @Body() body){
+        const result = await this.personService.SavePerson(body);
         return res.status(HttpStatus.OK).json({
             result
         })
     }
 
     @Put('/:id')
-    UpdatePerson(@Res() res, @Param('id') id, @Body() body, ){
-        const result = this.personService.ModifyPerson();
+    async UpdatePerson(@Res() res, @Param('id') id, @Body() body, ){
+        const result = await this.personService.ModifyPerson();
         return res.status(HttpStatus.OK).json({
             result
         })
     }
 
     @Delete('/:id')
-    DeletePerson(@Res() res, @Param('id') id, @Body() body){
+    async DeletePerson(@Res() res, @Param('id') id, @Body() body){
+        const result = await this.personService.RemovePerson();
         return res.status(HttpStatus.OK).json({
             message: 'Success'
         })

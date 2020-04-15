@@ -19,8 +19,9 @@ export class PersonService {
         return person;
     }
 
-    SavePerson(){
-        return {rut: 'success'}
+    SavePerson(body){
+        const person = this.personModel.create(body)
+        return person
     }
 
     ModifyPerson(){
