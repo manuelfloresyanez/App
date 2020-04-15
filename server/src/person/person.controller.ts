@@ -1,5 +1,4 @@
-import { Controller, Get, Res, HttpStatus, Post, Body, Param, Put, Delete } from '@nestjs/common';
-import { identity } from 'rxjs';
+import { Controller, Get, Res, HttpStatus, Post, Body, Param, Put, Delete, NotFoundException } from '@nestjs/common';
 import { PersonService } from './person.service';
 
 @Controller('people')
@@ -19,34 +18,53 @@ export class PersonController {
 
     @Get('/:id')
     async GetPerson(@Res() res, @Param('id') id){
-        const result = await this.personService.ViewPerson(id);
+        try{
+            const result = await this.personService.ViewPerson(id);
         return res.status(HttpStatus.OK).json({
             result
         })
+        }catch{
+            throw new NotFoundException('Invalid Id')
+        }
+        
     }
 
     @Post()
     async CreatePerson(@Res() res, @Body() body){
-        const result = await this.personService.SavePerson(body);
+        try{
+            const result = await this.personService.SavePerson(body);
         return res.status(HttpStatus.OK).json({
             result
         })
+        }catch{
+            throw new NotFoundException('Invalid Id')
+        }
+        
     }
 
     @Put('/:id')
     async UpdatePerson(@Res() res, @Param('id') id, @Body() body){
-        const result = await this.personService.ModifyPerson(id, body);
+        try{
+            const result = await this.personService.ModifyPerson(id, body);
         return res.status(HttpStatus.OK).json({
             result
         })
+        }catch{
+            throw new NotFoundException('Invalid Id')
+        }
+        
     }
 
     @Delete('/:id')
     async DeletePerson(@Res() res, @Param('id') id){
-        const result = await this.personService.RemovePerson(id);
+        try{
+            const result = await this.personService.RemovePerson(id);
         return res.status(HttpStatus.OK).json({
-            message: 'Success'
+            result
         })
+        }catch{
+            throw new NotFoundException('Invalid Id')
+        }   
     }
 
 }
