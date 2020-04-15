@@ -15,7 +15,7 @@ export class PersonService {
     }
 
     ViewPerson(id){
-        const person = this.personModel.findOneById(id)
+        const person = this.personModel.findById(id)
         return person;
     }
 
