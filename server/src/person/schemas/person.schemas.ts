@@ -6,4 +6,6 @@ export const PersonSchema = new Schema({
     lastName: { type: String, required: true},
     age: { type: Number, required: true},
     course: { type: String, required: true}
-})
+    },
+    {versionKey: false}
+)
