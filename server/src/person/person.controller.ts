@@ -9,19 +9,22 @@ export class PersonController {
     }
 
     @Get()
-    async findAllPeople(@Res() res){
-        const result = await this.personService.getAllPeople();
-        return res.status(HttpStatus.OK).json(result)
+    async findAll(@Res() res){
+        const persons = await this.personService.getAllPeople();
+        if(!persons){
+            throw new NotFoundException('No persons found')
+        }
+        return res.status(HttpStatus.OK).json(persons)
     }
 
     @Get('/:id')
-    async findPerson(@Res() res, @Param('id') id){
+    async find(@Res() res, @Param('id') id){
         try{
-            const persons = await this.personService.getPerson(id);
-            if(!persons){
+            const person = await this.personService.getPerson(id);
+            if(!person){
                 throw new NotFoundException('Person not found')
             }
-            return res.status(HttpStatus.OK).json(persons)
+            return res.status(HttpStatus.OK).json(person)
         }catch{
             throw new NotFoundException('Invalid Id')
         }
@@ -29,7 +32,7 @@ export class PersonController {
     }
 
     @Post()
-    async createPerson(@Res() res, @Body() body){
+    async create(@Res() res, @Body() body){
         try{
             const person = await this.personService.savePerson(body);
             return res.status(HttpStatus.CREATED).json(
@@ -45,7 +48,7 @@ export class PersonController {
     }
 
     @Put('/:id')
-    async updatePerson(@Res() res, @Param('id') id, @Body() body){
+    async update(@Res() res, @Param('id') id, @Body() body){
         try{
             if(body.rut != undefined || body.name != undefined || body.lastName != undefined || body.age != undefined || body.course != undefined){
                 const person = await this.personService.modifyPerson(id, body);
