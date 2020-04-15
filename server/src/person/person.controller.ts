@@ -55,8 +55,8 @@ export class PersonController {
                 })
             }
             return res.status(HttpStatus.BAD_REQUEST).json({
-                    "statusCode": 404,
-                    "error": "Not Found",
+                    "statusCode": 400,
+                    "error": "Bad Request",
                     "message": "Invalid Data"
                   })
         }catch{
