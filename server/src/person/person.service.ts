@@ -25,12 +25,12 @@ export class PersonService {
     }
 
     ModifyPerson(id, body){
-        const person = this.personModel.updateOneById(id, body)
+        const person = this.personModel.findOneAndUpdate(id, body)
         return person
     }
 
     RemovePerson(id){
-        const person = this.personModel.removeOneById(id)
+        const person = this.personModel.findOneAndDelete(id)
         return person
     }
     
