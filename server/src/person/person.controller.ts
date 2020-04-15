@@ -1,4 +1,13 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
 
-@Controller('person')
-export class PersonController {}
+@Controller('people')
+export class PersonController {
+
+
+    @Get()
+    GetAllPeople(@Res() res){
+        return res.status(HttpStatus.OK).json({
+            message: 'Success'
+        })
+    }
+}
