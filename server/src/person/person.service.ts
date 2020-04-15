@@ -4,22 +4,22 @@ import { Injectable } from '@nestjs/common';
 export class PersonService {
 
     ViewAllPeople(){
-
+        return {rut: 'success'}
     }
 
     ViewPerson(){
-        
+        return {rut: 'success'}
     }
 
-    CreatePerson(){
-
+    SavePerson(){
+        return {rut: 'success'}
     }
 
     UpdatePerson(){
-
+        return {rut: 'success'}
     }
 
-    DeletePerson(){
+    RemovePerson(){
 
     }
     

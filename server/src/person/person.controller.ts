@@ -5,11 +5,16 @@ import { PersonService } from './person.service';
 @Controller('people')
 export class PersonController {
 
+    constructor(private personService:PersonService){
+
+    }
+
+
     @Get()
     GetAllPeople(@Res() res){
-        PersonService
+        const result = this.personService.ViewAllPeople();
         return res.status(HttpStatus.OK).json({
-            success: 'Success'
+            result
         })
     }
 
