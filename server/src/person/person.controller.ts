@@ -47,7 +47,8 @@ export class PersonController {
             const result = await this.personService.ModifyPerson(id, body);
             if(result){
                 return res.status(HttpStatus.OK).json({
-                    message: 'Person successfully updated'
+                    message: 'Person successfully updated',
+                    _id: result._id
                 })
             }
         }catch{
@@ -62,7 +63,8 @@ export class PersonController {
             const result = await this.personService.RemovePerson(id);
             if(result){
                 return res.status(HttpStatus.OK).json({
-                    message: 'Person successfully deleted'
+                    message: 'Person successfully deleted',
+                    _id: result._id
                 })
             }
         }catch{
