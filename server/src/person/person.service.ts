@@ -10,8 +10,8 @@ export class PersonService {
     }
 
     ViewAllPeople(){
-        
-        return {rut: 'success'}
+        const allPersons = this.personModel.find();
+        return allPersons;
     }
 
     ViewPerson(){
