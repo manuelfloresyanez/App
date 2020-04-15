@@ -13,7 +13,7 @@ export class PersonController {
     }
 
     @Get('/:id')
-    GetPerson(@Param('id') id, @Res() res){
+    GetPerson(@Res() res, @Param('id') id){
         return res.status(HttpStatus.OK).json({
             message: 'Success'
         })
@@ -27,7 +27,7 @@ export class PersonController {
     }
 
     @Put('/:id')
-    UpdatePerson(@Param('id') id, @Body() body, @Res() res){
+    UpdatePerson(@Res() res, @Param('id') id, @Body() body, ){
         return res.status(HttpStatus.OK).json({
             message: 'Success'
         })
