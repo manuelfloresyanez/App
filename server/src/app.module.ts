@@ -5,7 +5,7 @@ import { PersonModule } from './person/person.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [PersonModule, MongooseModule.forRoot('mongodb://localhost/people', { useNewUrlParser: true , useUnifiedTopology: true })],
+  imports: [PersonModule, MongooseModule.forRoot('mongodb://localhost/people', { useNewUrlParser: true , useUnifiedTopology: true , useFindAndModify: false})],
   controllers: [AppController],
   providers: [AppService],
 })
