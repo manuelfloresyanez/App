@@ -1,4 +1,4 @@
-import { Controller, Get, Res, HttpStatus, Post, Body, Param, Put, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus, Post, Body, Param, Put, Delete, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PersonService } from './person.service';
 
 @Controller('people')
@@ -11,18 +11,14 @@ export class PersonController {
     @Get()
     async GetAllPeople(@Res() res){
         const result = await this.personService.ViewAllPeople();
-        return res.status(HttpStatus.OK).json({
-            result
-        })
+        return res.status(HttpStatus.OK).json(result)
     }
 
     @Get('/:id')
     async GetPerson(@Res() res, @Param('id') id){
         try{
             const result = await this.personService.ViewPerson(id);
-        return res.status(HttpStatus.OK).json({
-            result
-        })
+        return res.status(HttpStatus.OK).json(result)
         }catch{
             throw new NotFoundException('Invalid Id')
         }
@@ -33,11 +29,14 @@ export class PersonController {
     async CreatePerson(@Res() res, @Body() body){
         try{
             const result = await this.personService.SavePerson(body);
-        return res.status(HttpStatus.OK).json({
-            result
-        })
+        return res.status(HttpStatus.CREATED).json(
+            {
+                message: 'Person successfully created',    
+                _id: result._id
+            }
+        )
         }catch{
-            throw new NotFoundException('Invalid Id')
+            throw new BadRequestException('Invalid Data')
         }
         
     }
@@ -46,9 +45,11 @@ export class PersonController {
     async UpdatePerson(@Res() res, @Param('id') id, @Body() body){
         try{
             const result = await this.personService.ModifyPerson(id, body);
-            return res.status(HttpStatus.OK).json({
-                result
-            })
+            if(result){
+                return res.status(HttpStatus.OK).json({
+                    message: 'Person successfully updated'
+                })
+            }
         }catch{
             throw new NotFoundException('Invalid Id')
         }
@@ -59,9 +60,11 @@ export class PersonController {
     async DeletePerson(@Res() res, @Param('id') id){
         try{
             const result = await this.personService.RemovePerson(id);
-            return res.status(HttpStatus.OK).json({
-                result
-            })
+            if(result){
+                return res.status(HttpStatus.OK).json({
+                    message: 'Person successfully deleted'
+                })
+            }
         }catch{
             throw new NotFoundException('Invalid Id')
         }
