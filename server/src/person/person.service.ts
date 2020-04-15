@@ -14,8 +14,9 @@ export class PersonService {
         return allPersons;
     }
 
-    ViewPerson(){
-        return {rut: 'success'}
+    ViewPerson(id){
+        const person = this.personModel.findOneById(id)
+        return person;
     }
 
     SavePerson(){

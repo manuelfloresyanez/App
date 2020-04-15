@@ -19,7 +19,7 @@ export class PersonController {
 
     @Get('/:id')
     GetPerson(@Res() res, @Param('id') id){
-        const result = this.personService.ViewPerson();
+        const result = this.personService.ViewPerson(id);
         return res.status(HttpStatus.OK).json({
             result
         })
