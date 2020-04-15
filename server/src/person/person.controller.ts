@@ -59,12 +59,12 @@ export class PersonController {
     async DeletePerson(@Res() res, @Param('id') id){
         try{
             const result = await this.personService.RemovePerson(id);
-        return res.status(HttpStatus.OK).json({
-            result
-        })
+            return res.status(HttpStatus.OK).json({
+                result
+            })
         }catch{
             throw new NotFoundException('Invalid Id')
-        }   
+        }
     }
 
 }

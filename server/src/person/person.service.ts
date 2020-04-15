@@ -25,12 +25,12 @@ export class PersonService {
     }
 
     ModifyPerson(id, body){
-        const person = this.personModel.findOneAndUpdate(id, body, {new: true})
+        const person = this.personModel.findByIdAndUpdate(id, body, {new: true})
         return person
     }
 
-    RemovePerson(id){
-        const person = this.personModel.findOneAndDelete(id)
+    async RemovePerson(id){
+        const person = await this.personModel.findByIdAndDelete(id)
         return person
     }
     
