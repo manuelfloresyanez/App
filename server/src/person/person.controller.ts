@@ -1,4 +1,5 @@
-import { Controller, Get, Res, HttpStatus, Post, Body } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus, Post, Body, Param, Put } from '@nestjs/common';
+import { identity } from 'rxjs';
 
 @Controller('people')
 export class PersonController {
@@ -7,6 +8,13 @@ export class PersonController {
     @Get()
     GetAllPeople(@Res() res){
         return res.status(HttpStatus.OK).json({
+            success: 'Success'
+        })
+    }
+
+    @Get('/:id')
+    GetPerson(@Param('id') id, @Res() res){
+        return res.status(HttpStatus.OK).json({
             message: 'Success'
         })
     }
@@ -14,10 +22,15 @@ export class PersonController {
     @Post()
     CreatePerson(@Res() res,@Body() body){
         return res.status(HttpStatus.OK).json({
-            message: 'Person created'
+            message: 'Success'
         })
     }
 
-
+    @Put(':/id')
+    UpdatePerson(@Param('id') id, @Body() body, @Res() res){
+        return res.status(HttpStatus.OK).json({
+            message: 'success'
+        })
+    }
 
 }
