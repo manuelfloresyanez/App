@@ -1,0 +1,43 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "application-23people"
+  namespace: "default"
+  labels:
+    app: "application-23people"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "application-23people"
+  template:
+    metadata:
+      labels:
+        app: "application-23people"
+    spec:
+      containers:
+      - name: "node-js-sha256-1"
+        image: "NODE_JS_VARIABLE"
+      - name: "gke-test-sha256-2"
+        image: "MONGO_DB_VARIABLE"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "application-23people-hpa-y3aw"
+  namespace: "default"
+  labels:
+    app: "application-23people"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "application-23people"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
