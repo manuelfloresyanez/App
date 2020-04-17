@@ -1,4 +1,5 @@
 # This workflow will build a docker container, publish it to Google Container Registry, and deploy it to Google Kubernetes Engine when a pull request is made, and also when a release is created
+# 
 # Additionaly, this workflow performs some Cleaning actions in the Cluster as well as in the Self-Hosted Runner.
 # 
 # To configure this workflow:
