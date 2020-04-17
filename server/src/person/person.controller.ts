@@ -38,7 +38,7 @@ export class PersonController {
             const person = await this.personService.savePerson(createPersonDto);
             return res.status(HttpStatus.CREATED).json(
             {
-                message: 'Person successfully created',    
+                message_response: 'Person successfully created',    
                 _id: person._id
             }
         )
