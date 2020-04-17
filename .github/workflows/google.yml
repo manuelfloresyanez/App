@@ -33,7 +33,7 @@ env:
   SHELL_SCRIPT_PATH: ${{ secrets.SHELL_SCRIPT_PATH }}
   MONGO_DB: ${{ secrets.MONGO_DB }}
   NODE_JS_DIST_and_TAG: ${{ secrets.NODE_JS_DIST_and_TAG }}
-  GET_FILE_PATH: ${{ secrets.GET_FILE_PATH }}
+  FILE_PATH: ${{ secrets.FILE_PATH }}
       
 
 jobs:
@@ -78,10 +78,6 @@ jobs:
     - name: Create variable for Deployment
       run : |
         echo ::set-env name=DIST_and_TAG::$(sh $NODE_JS_DIST_and_TAG)
-    # Create variables to be used in deployment.yaml
-    - name: Create variable PATH
-      run : |
-        echo ::set-env name=FILE_PATH::$(sh $GET_FILE_PATH)
     # Add variables to deployment.yaml file
     - name: Add variables
       run : |
