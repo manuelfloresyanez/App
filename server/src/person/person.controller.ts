@@ -1,5 +1,6 @@
 import { Controller, Get, Res, HttpStatus, Post, Body, Param, Put, Delete, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PersonService } from './person.service';
+import { CreatePersonDto } from './dto/create-person.dto';
 
 @Controller('people')
 export class PersonController {
@@ -32,9 +33,9 @@ export class PersonController {
     }
 
     @Post()
-    async create(@Res() res, @Body() body): Promise<any[]>{
+    async create(@Res() res, @Body() createPersonDto:CreatePersonDto): Promise<any[]>{
         try{
-            const person = await this.personService.savePerson(body);
+            const person = await this.personService.savePerson(createPersonDto);
             return res.status(HttpStatus.CREATED).json(
             {
                 message: 'Person successfully created',    
